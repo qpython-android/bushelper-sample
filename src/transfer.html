@@ -1,0 +1,53 @@
+<!doctype html>
+<html class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Amaze UI Widget</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <link rel="stylesheet" href="css/amazeui.min.css">
+  <style>
+  </style>
+</head>
+<body>
+<!-- Header -->
+<header data-am-widget="header" class="am-header am-header-default am-header-fixed">
+  <div class="am-header-left am-header-nav">
+    <a href="#left-link" class="">
+      <i class="am-header-icon am-icon-angle-left"></i>
+    </a>
+  </div>
+  <h1 class="am-header-title">
+    <a href="#title-link" id="title" class="">没有找到相关线路</a>
+  </h1>
+  <div class="am-header-right am-header-nav">
+    <a href="#right-link" class="">
+      <i class="am-header-icon am-icon-bars"></i>
+    </a>
+  </div>
+</header>
+
+
+<section id="sectionId" data-am-widget="accordion" class="am-accordion am-accordion-default"
+data-am-accordion=''>
+
+</section>
+
+<div style="height:30px;"></div>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/amazeui.min.js"></script>
+<script type="text/javascript">
+function appendTransfer(num, dist, transTime, time, footDist, info){
+	$("#sectionId").append('<dl class="am-accordion-item"><dt class="am-accordion-title">' + num + '-长:' + dist + 'm，换乘:' + transTime + '次，耗时:' + time + 'min，步行:' + footDist + 'm</dt><dd class="am-accordion-bd am-collapse"><div class="am-accordion-content">' + info + '</div></dd></dl>');
+}
+function resultCount(num) {
+	$("#title").text('找到'+ num + '个方案');
+}
+</script>
+</body>
+</html>
