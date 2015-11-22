@@ -53,7 +53,7 @@ def server_static(filepath):
     return static_file(filepath, root=ROOT+'/assets')
 
 def home():
-    return template('index.html')
+    return template(ROOT+'/index.html')
 
 
 ######### WEBAPP ROUTERS ###############
