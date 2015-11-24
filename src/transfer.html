@@ -17,7 +17,7 @@
 <!-- Header -->
 <header data-am-widget="header" class="am-header am-header-default am-header-fixed">
   <div class="am-header-left am-header-nav">
-    <a href="#left-link" class="">
+    <a href="/" class="">
       <i class="am-header-icon am-icon-angle-left"></i>
     </a>
   </div>
@@ -47,6 +47,26 @@ function appendTransfer(num, dist, transTime, time, footDist, info){
 }
 function resultCount(num) {
 	$("#title").text('找到'+ num + '个方案');
+}
+
+var data = {{ !data }}
+resultCount(data.result_num)
+if (data.result_num==0) {
+	$("#sectionId").append('<div style="padding:5px">没有找到相应方案</div>');
+} else {
+    for (var i=0;i<data.result_num;i++) {
+        var b = data['buses']['bus'][i]
+        var sgs = b['segments']['segment']
+        var info = '<div>'
+        for(var j=0;j<sgs.length;j++) {
+            var sg = sgs[j]
+            info = info+"<code>搭乘</code>" + sg['line_name']+ "<br><code>起始站</code>" + sg['start_stat'] + " <code>终点站</code>" + sg['end_stat'] + "<br><code>经过站点</code><br>" + sg['stats'] + "<br><code>行驶距离</code>" + sg['line_dist'] + "m <code>步行距离</code>" + sg['foot_dist'] + "m<hr>"
+        }
+        info = info+"</div>"
+
+        appendTransfer(i+1,b['dist'],b['segments']['segment'].length,b['time'],b['foot_dist'],info)
+    }
+
 }
 </script>
 </body>

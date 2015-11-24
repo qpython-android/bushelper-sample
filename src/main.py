@@ -9,7 +9,7 @@
 """
 
 from bottle import Bottle, ServerAdapter
-from bottle import run, debug, route, error, static_file, template, redirect
+from bottle import run, debug, route, error, static_file, template, redirect, request
 
 import urllib2
 import os
@@ -18,6 +18,8 @@ import json
 ASSETS = "/assets/"
 ROOT = os.path.dirname(os.path.abspath(__file__))
 
+API_URL = 'http://openapi.aibang.com/bus/lines?app_key=d706b1f36e6adfdb862f7f54c132390f&alt=json'
+API_URL2 = 'http://openapi.aibang.com/bus/transfer?app_key=d706b1f36e6adfdb862f7f54c132390f&alt=json'
 
 ######### QPYTHON WEB SERVER ###############
 
@@ -57,10 +59,29 @@ def home():
     return template(ROOT+'/index.html')
 
 def detail():
-    return template(ROOT+'/detail.html')
+    city = request.GET['city']
+    q = request.GET['keyword']
+
+    data = _get_json_content(API_URL+"&city="+city+"&q="+q)
+
+    return template(ROOT+'/detail.html', data=data)
 
 def transfer():
-    return template(ROOT+'/transfer.html')
+    city = request.GET['city']
+    here = request.GET['here']
+    ther = request.GET['ther']
+
+    data = _get_json_content(API_URL2+"&city="+city+"&start_addr="+here+"&end_addr="+ther)
+    print data
+    return template(ROOT+'/transfer.html',data=data)
+
+def _get_json_content(jurl):
+    print jurl
+    data = urllib2.urlopen(jurl)
+    content = data.read()
+    data.close()
+    
+    return content
 
 
 

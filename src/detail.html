@@ -17,7 +17,7 @@
 <!-- Header -->
 <header data-am-widget="header" class="am-header am-header-default am-header-fixed">
   <div class="am-header-left am-header-nav">
-    <a href="#left-link" class="">
+    <a href="/" class="">
       <i class="am-header-icon am-icon-angle-left"></i>
     </a>
   </div>
@@ -48,6 +48,18 @@ function appendDetail(name, info, stats){
 function resultCount(num) {
 	$("#title").text('找到'+ num + '条线路');
 }
+var data = {{ !data }}
+resultCount(data.result_num)
+if (data.result_num==0) {
+
+	$("#sectionId").append('<div style="padding:5px">没有找到对应的路线</div>');
+} else {
+    for (var i=0;i<data.result_num;i++) {
+        var b = data['lines']['line'][i]
+        appendDetail(b['name'],b['info'],b['stats'])
+    }
+}
+
 </script>
 </body>
 </html>
