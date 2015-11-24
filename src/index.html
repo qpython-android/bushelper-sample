@@ -192,13 +192,13 @@ function setCity(city, fullName) {
 function btnOnclick() {
 	var city = $("#city").val();
 	var keyword = $("#keyword").val();
-	window.android.callDetailActivity(city, keyword);
+    location.href = '/detail?city='+city+"&keyword="+keyword
 }
 function btnOnclick2() {
 	var city = $("#city").val();
 	var here = $("#here").val();
 	var there = $("#there").val();
-	window.android.callTransferActivity(city, here, there);
+    location.href = '/transfer?city='+city+"&here="+here+"&ther="+there
 }
 </script>
 </body>

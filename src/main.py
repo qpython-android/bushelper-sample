@@ -1,5 +1,6 @@
 #-*-coding:utf-8-*-  
 #qpy:webapp:公交路线查询
+#qpy:fullscreen
 #qpy://127.0.0.1:8081/
 """
 公交路线查询
@@ -55,10 +56,20 @@ def server_static(filepath):
 def home():
     return template(ROOT+'/index.html')
 
+def detail():
+    return template(ROOT+'/detail.html')
+
+def transfer():
+    return template(ROOT+'/transfer.html')
+
+
+
 
 ######### WEBAPP ROUTERS ###############
 app = Bottle()
 app.route('/', method='GET')(home)
+app.route('/detail', method='GET')(detail)
+app.route('/transfer', method='GET')(transfer)
 app.route('/__exit', method=['GET','HEAD'])(__exit)
 app.route('/__ping', method=['GET','HEAD'])(__ping)
 app.route('/assets/<filepath:path>', method='GET')(server_static)
