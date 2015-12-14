@@ -115,7 +115,7 @@ WebApp的主界面如附件所示，顶部是常见的导航，下来是公交�
 
 #### QPython的WebApp框架
 
-QPython默认集成了bottle Web开发框架(http://bottlepy.org/docs/dev/index.html)，因此可以用它来开发Web应用。在这个项目中，我们就是使用Bottle来进行开发。
+QPython默认集成了[bottle Web开发框架](http://bottlepy.org/docs/dev/index.html) 在这个项目中，我们就是使用Bottle来进行开发。
 
 
 
