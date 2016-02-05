@@ -21,6 +21,17 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 API_URL = 'http://openapi.aibang.com/bus/lines?app_key=d706b1f36e6adfdb862f7f54c132390f&alt=json'
 API_URL2 = 'http://openapi.aibang.com/bus/transfer?app_key=d706b1f36e6adfdb862f7f54c132390f&alt=json'
 
+
+
+##################### SL4A ##############
+try:
+    import androidhelper
+    Droid = androidhelper.Android()
+    Droid.startLocating()
+except:
+    pass
+
+
 ######### QPYTHON WEB SERVER ###############
 
 class MyWSGIRefServer(ServerAdapter):
@@ -56,7 +67,9 @@ def server_static(filepath):
     return static_file(filepath, root=ROOT+'/assets')
 
 def home():
-    return template(ROOT+'/index.html')
+    location = Droid.getLastKnownLocation().result
+    location = location.get('network', location.get('gps'))
+    return template(ROOT+'/index.html', city='北京')
 
 def detail():
     city = request.GET['city']
