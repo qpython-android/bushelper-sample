@@ -9,11 +9,10 @@
 """
 
 from bottle import Bottle, ServerAdapter
-from bottle import run, debug, route, error, static_file, template, redirect, request
+from bottle import static_file, template, request
 
 import urllib2
-import os
-import json
+import os,os.path
 #### 常量定义 #########
 ASSETS = "/assets/"
 ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -25,10 +24,12 @@ API_URL2 = 'http://openapi.aibang.com/bus/transfer?app_key=d706b1f36e6adfdb862f7
 
 ##################### SL4A ##############
 try:
-    import androidhelper
-    Droid = androidhelper.Android()
-    Droid.startLocating()
+    IS_SL4A = True
+    #import androidhelper
+    #Droid = androidhelper.Android()
+    #Droid.startLocating()
 except:
+    IS_SL4A = False
     pass
 
 
@@ -67,8 +68,9 @@ def server_static(filepath):
     return static_file(filepath, root=ROOT+'/assets')
 
 def home():
-    location = Droid.getLastKnownLocation().result
-    location = location.get('network', location.get('gps'))
+    #if IS_SL4A:
+    #    location = Droid.getLastKnownLocation().result
+    #    location = location.get('network', location.get('gps'))
     return template(ROOT+'/index.html', city='北京')
 
 def detail():
